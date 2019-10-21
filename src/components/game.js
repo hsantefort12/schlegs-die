@@ -1,0 +1,132 @@
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+
+var Form = (props) => {
+    return(
+        <form>
+            <label>Player 1: <input type="text"
+                                    id="0"
+                                    onChange={(e) => props.onChange(0, e)}
+                                    value={props.value[0]}
+                                    />
+            </label><br/>
+            <label>Player 2: <input type="text"
+                                    id="1"
+                                    onChange={(e) => props.onChange(1, e)}
+                                    value={props.value[1]}
+                                    />
+            </label><br/>
+            <label>Player 3: <input type="text"
+                                    id="2"
+                                    onChange={(e) => props.onChange(2, e)}
+                                    value={props.value[2]}
+                                    />
+            </label><br/>
+            <label>Player 4: <input type="text"
+                                    id="3"
+                                    onChange={(e) => props.onChange(3, e)}
+                                    value={props.value[3]}
+                                    />
+            </label><br/>
+            <label>Player 5: <input type="text"
+                                    id="4"
+                                    onChange={(e) => props.onChange(4, e)}
+                                    value={props.value[4]}
+                                    />
+            </label><br/>
+            <input type="button" className="btn btn-dark" value="Submit" onClick={props.submit}/>
+            
+        </form>
+    );
+}
+
+export class InitGame extends Component {
+    
+    constructor(props) {
+        super(props);
+        this.temp = new Array(5);
+        this.state = {
+            players: this.temp,
+            redirect: false
+        }
+
+        this.onChange = this.onChange.bind(this);
+        this.submit = this.submit.bind(this);
+    }
+    
+    onChange(i, event) {
+        this.temp[i] = event.target.value;
+        this.setState({
+            players: this.temp,
+            redirect: false
+        })
+    }
+
+    submit() {
+        for (const [index, value] of this.temp.entries()) {
+            if (value === undefined) {
+                alert("Names cannot be empty!");
+                return index;
+            }   
+        }
+        this.setState({
+            players: this.temp,
+            redirect: true
+        });
+    } 
+
+    
+    render() {
+        if (!this.state.redirect){
+            return (
+                <div className="container">
+                    <h1>Let's Play Schlegs Die</h1>
+                    <p>
+                        First things first, let's get all the players names:
+                    </p>
+                    <Form onChange={this.onChange} value={this.state.players} submit={this.submit}/>
+                </div>
+            );
+        } else {
+            return <Redirect to={{
+                pathname: "/play",
+                state: {stateValue: this.state.players},
+            }} />
+        }
+    }
+}
+
+export class PlayGame extends Component {
+    constructor (props) {
+        super(props);
+        this.player = [...this.props.location.state.stateValue, "Wild Card"];
+        this.timesGone = new Array(6);
+        for (var i = 0; i < this.timesGone.length; i++) {
+            this.timesGone[i] = 0;
+        }
+        this.state = {
+            players: this.player,
+            tg: this.timesGone,
+        };
+    }
+
+    render(){
+
+        const playerList = [];
+
+        for (const [index, value] of this.player.entries()) {
+            playerList.push(<li key={index}>{value}: {this.timesGone[index]}</li>)
+        }
+        return(
+            <div className="container">
+                <h2>Let the games begin</h2>
+                <div>
+                    <uo>
+                        {playerList}
+                    </uo>
+                </div>
+                
+            </div>
+        );
+    }
+}
