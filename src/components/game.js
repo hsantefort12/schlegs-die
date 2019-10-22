@@ -123,10 +123,7 @@ export class PlayGame extends Component {
     }
 
     roll(){
-        var roll = Math.floor(Math.random() * 6) - 1;
-        if (roll < 0) {
-            roll = 5;
-        }
+        var roll = Math.floor(Math.random() * 6);
         var player = this.state.players[roll];
         var newCount = player === this.state.lastRoll ? this.state.count + 1 : 0;
         this.timesGone[roll] = this.timesGone[roll] + 1;
