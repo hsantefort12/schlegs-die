@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
+
 var Form = (props) => {
     return(
         <form>
@@ -106,27 +107,79 @@ export class PlayGame extends Component {
         }
         this.state = {
             players: this.player,
-            tg: this.timesGone,
+            counts: this.timesGone,
+            punishments: [
+                'Take a sip', 
+                'Finish your drink', 
+                'Shotgun/Shot',
+                'Shot', 
+                'Put it in your butt'
+            ],
+            lastRoll: "",
+            count: 0
         };
+
+        this.roll = this.roll.bind(this);
+    }
+
+    roll(){
+        var roll = Math.floor(Math.random() * 6) - 1;
+        if (roll < 0) {
+            roll = 5;
+        }
+        var player = this.state.players[roll];
+        var newCount = player === this.state.lastRoll ? this.state.count + 1 : 0;
+        this.timesGone[roll] = this.timesGone[roll] + 1;
+        this.setState({
+            lastRoll: player,
+            count: newCount,
+            counts: this.counts
+        });
     }
 
     render(){
-
         const playerList = [];
+
+        console.log(this.state.lastRoll);
 
         for (const [index, value] of this.player.entries()) {
             playerList.push(<li key={index}>{value}: {this.timesGone[index]}</li>)
         }
-        return(
-            <div className="container">
-                <h2>Let the games begin</h2>
-                <div>
-                    <uo>
-                        {playerList}
-                    </uo>
-                </div>
-                
-            </div>
-        );
+        if (this.state.lastRoll === ""){
+            return(
+                <div className="container">
+                    <div className="container float-left">
+                        <h2>Let the games begin</h2>
+                        <div calssName="float-right">
+                            <uo>
+                                {playerList}
+                            </uo>
+                            <input type="button" className="btn btn-dark" value="Roll Die" onClick={this.roll}/>
+                        </div>
+                    </div>
+                </div>  
+            );
+        } else {
+            var person = this.state.lastRoll;
+            var punishment = this.state.punishments[this.state.count];
+            return(
+                <div className="container">
+                    <div className="container float-left">
+                        <h2>Let the games begin</h2>
+                        <div calssName="float-right">
+                            <uo>
+                                {playerList}
+                            </uo>
+                            <input type="button" className="btn btn-dark" value="Roll Die" onClick={this.roll}/>
+                        </div>
+                    </div>
+                    <div className="container">
+                        <div>{person}</div>
+                        <div>{punishment}</div>
+                    </div>
+                </div> 
+            );
+
+        }
     }
 }
