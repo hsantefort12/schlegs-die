@@ -14,6 +14,9 @@ export var Nav = () => {
                     <div className="container">
                         <Link to='/gameStart' className="navbar-item">Play Game</Link>
                     </div>
+                    <div className="container">
+                        <a href="https://github.com/hsantefort12/schlegs-die" className="navbar-item">Source Code</a>
+                    </div>
                 </div>
             </div>
         </nav> 
