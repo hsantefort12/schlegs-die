@@ -27,15 +27,6 @@ class Main extends Component {
     }
 }
 
-/*
-class Main extends Component {
-    render() {
-        return (
-            <Test />
-        );
-    }
-}
-*/
 ReactDOM.render(
     <Main />,
     document.getElementById('root')

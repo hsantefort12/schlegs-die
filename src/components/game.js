@@ -36,7 +36,6 @@ var Form = (props) => {
                                     />
             </label><br/>
             <input type="button" className="btn btn-dark" value="Submit" onClick={props.submit}/>
-            
         </form>
     );
 }
