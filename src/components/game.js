@@ -64,6 +64,7 @@ export class InitGame extends Component {
 
     submit() {
         for (const [index, value] of this.temp.entries()) {
+            
             if (value === undefined) {
                 alert("Names cannot be empty!");
                 return index;
@@ -73,6 +74,7 @@ export class InitGame extends Component {
             players: this.temp,
             redirect: true
         });
+       
     } 
 
     
@@ -100,7 +102,7 @@ export class PlayGame extends Component {
     constructor (props) {
         super(props);
         this.player = [...this.props.location.state.stateValue, "Wild Card"];
-        this.timesGone = new Array(6);
+        this.timesGone = new Array(this.player.length);
         for (var i = 0; i < this.timesGone.length; i++) {
             this.timesGone[i] = 0;
         }
@@ -122,7 +124,7 @@ export class PlayGame extends Component {
     }
 
     roll(){
-        var roll = Math.floor(Math.random() * 6);
+        var roll = Math.floor(Math.random() * this.state.players.length);
         var player = this.state.players[roll];
         var newCount = player === this.state.lastRoll ? this.state.count + 1 : 0;
         this.timesGone[roll] = this.timesGone[roll] + 1;
@@ -135,8 +137,6 @@ export class PlayGame extends Component {
 
     render(){
         const playerList = [];
-
-        console.log(this.state.lastRoll);
 
         for (const [index, value] of this.player.entries()) {
             playerList.push(<li key={index}>{value}: {this.timesGone[index]}</li>)
