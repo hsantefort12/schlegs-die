@@ -71,9 +71,6 @@ html, body {
     height: 100%;
   }
 
-  .bm-menu-wrap:closed {
-    transform: translate3d(-110%, 0px, 0px);
-  }
   
   /* General sidebar styles */
   .bm-menu {
