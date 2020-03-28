@@ -29,12 +29,14 @@ var Form = (props) => {
                                     value={props.value[3]}
                                     />
             </label><br/>
+            <div>
             <label>Player 5: <input type="text"
                                     id="4"
                                     onChange={(e) => props.onChange(4, e)}
                                     value={props.value[4]}
                                     />
             </label><br/>
+            </div>
             <input type="button" className="btn btn-dark" value="Submit" onClick={props.submit}/>
         </form>
     );
