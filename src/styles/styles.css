@@ -69,7 +69,6 @@ html, body {
   .bm-menu-wrap {
     position: fixed;
     height: 100%;
-    transform: translate3d(-110%, 0px, 0px);
   }
   
   /* General sidebar styles */
