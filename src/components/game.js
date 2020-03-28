@@ -1,23 +1,40 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-var PlayerData = (props) => {
-    return (
-        <div>
-            <label>Player 1: <input type="text"
-                                    id="0"
-                                    onChange={(e) => props.onChange(props.number, e)}
-                                    value={props.value[props.number]}
-                                    />
-            </label><br/>
-        </div>
-    )
-}
 
 var Form = (props) => {
     return(
         <form>
-            <PlayerData onChange={props.onChange} number={0} />
+            <label>Player 1: <input type="text"
+                                    id="0"
+                                    onChange={(e) => props.onChange(0, e)}
+                                    value={props.value[0]}
+                                    />
+            </label><br/>
+            <label>Player 2: <input type="text"
+                                    id="1"
+                                    onChange={(e) => props.onChange(1, e)}
+                                    value={props.value[1]}
+                                    />
+            </label><br/>
+            <label>Player 3: <input type="text"
+                                    id="2"
+                                    onChange={(e) => props.onChange(2, e)}
+                                    value={props.value[2]}
+                                    />
+            </label><br/>
+            <label>Player 4: <input type="text"
+                                    id="3"
+                                    onChange={(e) => props.onChange(3, e)}
+                                    value={props.value[3]}
+                                    />
+            </label><br/>
+            <label>Player 5: <input type="text"
+                                    id="4"
+                                    onChange={(e) => props.onChange(4, e)}
+                                    value={props.value[4]}
+                                    />
+            </label><br/>
             <input type="button" className="btn btn-dark" value="Submit" onClick={props.submit}/>
         </form>
     );
