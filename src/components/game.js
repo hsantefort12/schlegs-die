@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
+var PlayerData = (props) => {
+    return (
+        <div>
+            <label>Player 1: <input type="text"
+                                    id="0"
+                                    onChange={(e) => props.onChange(0, e)}
+                                    value={props.value[0]}
+                                    />
+            </label><br/>
+        </div>
+    )
+}
 
 var Form = (props) => {
     return(
         <form>
-            <label>Player 1: <input type="text"
+            <PlayerData onChange={props.onChange} />
+            {/* <label>Player 1: <input type="text"
                                     id="0"
                                     onChange={(e) => props.onChange(0, e)}
                                     value={props.value[0]}
@@ -34,7 +47,7 @@ var Form = (props) => {
                                     onChange={(e) => props.onChange(4, e)}
                                     value={props.value[4]}
                                     />
-            </label><br/>
+            </label><br/> */}
             <input type="button" className="btn btn-dark" value="Submit" onClick={props.submit}/>
         </form>
     );
