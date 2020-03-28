@@ -6,8 +6,8 @@ var PlayerData = (props) => {
         <div>
             <label>Player 1: <input type="text"
                                     id="0"
-                                    onChange={(e) => props.onChange(0, e)}
-                                    value={props.value[0]}
+                                    onChange={(e) => props.onChange(props.number, e)}
+                                    value={props.value[props.number]}
                                     />
             </label><br/>
         </div>
@@ -17,6 +17,7 @@ var PlayerData = (props) => {
 var Form = (props) => {
     return(
         <form>
+            <PlayerData onChange={props.onChange} number={0} />
             <input type="button" className="btn btn-dark" value="Submit" onClick={props.submit}/>
         </form>
     );
