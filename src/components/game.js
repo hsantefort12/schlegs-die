@@ -1,43 +1,33 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
+var Player = (props) => {
+    return (
+        <div>
+            <label>Player {props.number + 1}: <input type="text"
+                                        id={props.number}
+                                        onChange={(e) => props.onChange(props.number, e)}
+                                        value={props.value[props.number]}
+                                        />
+            </label><br/>
+        </div>
+    )
+}
+
+function getPlayers(numberOfPlayers, onChange, value) {
+    var players = [];
+    for (var i = 0; i < numberOfPlayers; i++) {
+        players.push(<Player onChange={onChange} number={i} value={value} />)
+    }
+    return players;
+}
 
 var Form = (props) => {
     return(
         <form>
-            <label>Player 1: <input type="text"
-                                    id="0"
-                                    onChange={(e) => props.onChange(0, e)}
-                                    value={props.value[0]}
-                                    />
-            </label><br/>
-            <label>Player 2: <input type="text"
-                                    id="1"
-                                    onChange={(e) => props.onChange(1, e)}
-                                    value={props.value[1]}
-                                    />
-            </label><br/>
-            <label>Player 3: <input type="text"
-                                    id="2"
-                                    onChange={(e) => props.onChange(2, e)}
-                                    value={props.value[2]}
-                                    />
-            </label><br/>
-            <label>Player 4: <input type="text"
-                                    id="3"
-                                    onChange={(e) => props.onChange(3, e)}
-                                    value={props.value[3]}
-                                    />
-            </label><br/>
-            <div>
-            <label>Player 5: <input type="text"
-                                    id="4"
-                                    onChange={(e) => props.onChange(4, e)}
-                                    value={props.value[4]}
-                                    />
-            </label><br/>
-            </div>
+            {getPlayers(props.numberOfPlayers, props.onChange, props.value)}
             <input type="button" className="btn btn-dark" value="Submit" onClick={props.submit}/>
+            <input type="button" className="btn btn-dark" value="Add Player" onClick={props.addPlayer} />
         </form>
     );
 }
@@ -49,11 +39,13 @@ export class InitGame extends Component {
         this.temp = new Array(5);
         this.state = {
             players: this.temp,
-            redirect: false
+            redirect: false,
+            numberOfPlayers: 5
         }
 
         this.onChange = this.onChange.bind(this);
         this.submit = this.submit.bind(this);
+        this.addPlayer = this.addPlayer.bind(this);
     }
     
     onChange(i, event) {
@@ -61,6 +53,12 @@ export class InitGame extends Component {
         this.setState({
             players: this.temp,
             redirect: false
+        })
+    }
+
+    addPlayer() {
+        this.setState({
+            numberOfPlayers: this.state.numberOfPlayers + 1
         })
     }
 
@@ -86,7 +84,7 @@ export class InitGame extends Component {
                     <p>
                         First things first, let's get all the players names:
                     </p>
-                    <Form onChange={this.onChange} value={this.state.players} submit={this.submit}/>
+                    <Form numberOfPlayers={this.state.numberOfPlayers} onChange={this.onChange} value={this.state.players} submit={this.submit} addPlayer={this.addPlayer}/>
                 </div>
             );
         } else {
