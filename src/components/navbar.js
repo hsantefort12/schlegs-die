@@ -16,16 +16,3 @@ export var Nav = () => {
         </nav> 
     );
 }
-
-
-/*
-<div className="container">
-                    <Link to='/rules' className="navbar-item">Rules </Link>
-                </div>
-                <div className="container">
-                    <Link to='/gameStart' className="navbar-item">Play Game</Link>
-                </div>
-                <div className="container">
-                    <a href="https://github.com/hsantefort12/schlegs-die" className="navbar-item">Source Code</a>
-                </div>
-                */
