@@ -42,7 +42,6 @@ export class InitGame extends Component {
             redirect: false,
             numberOfPlayers: 5
         }
-
         this.onChange = this.onChange.bind(this);
         this.submit = this.submit.bind(this);
         this.addPlayer = this.addPlayer.bind(this);
@@ -64,7 +63,6 @@ export class InitGame extends Component {
 
     submit() {
         for (const [index, value] of this.temp.entries()) {
-            
             if (value === undefined) {
                 alert("Names cannot be empty!");
                 return index;

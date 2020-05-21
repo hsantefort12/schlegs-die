@@ -9,6 +9,7 @@ import {
     Route
 } from 'react-router-dom';
 import { Nav } from './components/navbar';
+
 class Main extends Component {
     render() {
         return(
