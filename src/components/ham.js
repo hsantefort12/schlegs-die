@@ -8,7 +8,7 @@ export default class HamMenu extends Component {
             <Menu {...this.props} width={"300"}>
                 <Link className="menu-item" to='/rules'>Rules </Link>
                 <Link to='/gameStart' className="menu-item">Play Game</Link>
-                <a href="" className="menu-item">Source Code</a>
+                <a href="https://github.com/hsantefort12/schlegs-die" className="menu-item">Source Code</a>
             </Menu>
         );
     }
